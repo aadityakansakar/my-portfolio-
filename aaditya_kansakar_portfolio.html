@@ -1,0 +1,1800 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aaditya Kansakar — Web Developer &amp; Creative Designer</title>
+  <meta name="description" content="Personal portfolio of Aaditya Kansakar, a Web Developer and Creative Designer focused on clean digital experiences, modern interfaces, and creative technology.">
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          },
+          colors: {
+            canvas: '#090a0c',
+            surface: '#111216',
+            'surface-elevated': '#171920',
+            'surface-hover': '#1e212b',
+            border: 'rgba(255, 255, 255, 0.08)',
+            'border-light': 'rgba(255, 255, 255, 0.16)',
+            accent: '#d2e823',
+            'accent-muted': 'rgba(210, 232, 35, 0.12)',
+            body: '#9e9ea7',
+            headline: '#f5f5f7',
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #090a0c;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #232630;
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #343846;
+    }
+
+    .bg-grid-pattern {
+      background-size: 32px 32px;
+      background-image: 
+        linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    }
+
+    @media (pointer: fine) {
+      .custom-cursor-follower {
+        position: fixed;
+        pointer-events: none;
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        border: 1px solid rgba(210, 232, 35, 0.45);
+        transform: translate(-50%, -50%);
+        transition: transform 0.15s ease-out, width 0.25s cubic-bezier(0.16, 1, 0.3, 1), height 0.25s cubic-bezier(0.16, 1, 0.3, 1), background 0.2s ease, border-color 0.2s ease;
+        z-index: 9999;
+      }
+      .custom-cursor-dot {
+        position: fixed;
+        pointer-events: none;
+        width: 5px;
+        height: 5px;
+        border-radius: 50%;
+        background: #d2e823;
+        transform: translate(-50%, -50%);
+        z-index: 10000;
+        transition: transform 0.1s ease;
+      }
+      .cursor-hover .custom-cursor-follower {
+        width: 48px;
+        height: 48px;
+        background: rgba(210, 232, 35, 0.1);
+        border-color: #d2e823;
+      }
+    }
+
+    *:focus-visible {
+      outline: 2px solid #d2e823;
+      outline-offset: 3px;
+    }
+
+    .glass-nav {
+      background-color: rgba(9, 10, 12, 0.85);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+    }
+
+    .spotlight-card {
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+    .spotlight-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(400px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(210, 232, 35, 0.08), transparent 70%);
+      opacity: 0;
+      transition: opacity 0.35s ease;
+      pointer-events: none;
+      z-index: 1;
+    }
+    .spotlight-card:hover::before {
+      opacity: 1;
+    }
+    .spotlight-card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(210, 232, 35, 0.35);
+      box-shadow: 0 16px 36px -12px rgba(0, 0, 0, 0.6), 0 0 24px -8px rgba(210, 232, 35, 0.12);
+    }
+
+    .hover-lift {
+      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.2s ease, background-color 0.2s ease, box-shadow 0.25s ease;
+    }
+    .hover-lift:hover {
+      transform: translateY(-2.5px) scale(1.02);
+      border-color: rgba(210, 232, 35, 0.4);
+      background-color: #1a1c24;
+      box-shadow: 0 6px 16px -4px rgba(0, 0, 0, 0.4);
+    }
+
+    .btn-magnetic {
+      position: relative;
+      overflow: hidden;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .btn-magnetic:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px -6px rgba(210, 232, 35, 0.3);
+    }
+    .btn-magnetic:active {
+      transform: translateY(0) scale(0.98);
+    }
+
+    .ripple-wave {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(210, 232, 35, 0.35);
+      pointer-events: none;
+      width: 40px;
+      height: 40px;
+      margin-left: -20px;
+      margin-top: -20px;
+      animation: clickRippleEffect 0.6s ease-out forwards;
+    }
+    @keyframes clickRippleEffect {
+      0% {
+        transform: scale(0);
+        opacity: 0.6;
+      }
+      100% {
+        transform: scale(3.5);
+        opacity: 0;
+      }
+    }
+
+    @keyframes modalEntrance {
+      0% {
+        opacity: 0;
+        transform: scale(0.94) translateY(20px);
+      }
+      100% {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+      }
+    }
+    .modal-enter {
+      animation: modalEntrance 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    @keyframes contentFadeUp {
+      0% {
+        opacity: 0;
+        transform: translateY(12px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    .stagger-1 {
+      animation: contentFadeUp 0.35s cubic-bezier(0.16, 1, 0.3, 1) 0.05s backwards;
+    }
+    .stagger-2 {
+      animation: contentFadeUp 0.35s cubic-bezier(0.16, 1, 0.3, 1) 0.12s backwards;
+    }
+    .stagger-3 {
+      animation: contentFadeUp 0.35s cubic-bezier(0.16, 1, 0.3, 1) 0.18s backwards;
+    }
+  </style>
+</head>
+
+<body class="bg-canvas text-body font-sans antialiased selection:bg-accent selection:text-black relative overflow-x-hidden min-h-screen bg-grid-pattern">
+  
+  <div id="cursor-follower" class="custom-cursor-follower hidden md:block"></div>
+  <div id="cursor-dot" class="custom-cursor-dot hidden md:block"></div>
+
+  <!-- Header Navigation -->
+  <header class="fixed top-0 left-0 right-0 z-40 glass-nav border-b border-border transition-all duration-300">
+    <div class="max-w-6xl mx-auto px-5 sm:px-8 h-18 py-4 flex items-center justify-between">
+      
+      <!-- Brand Logo with Profile Circle -->
+      <a href="#hero" class="group flex items-center gap-3 text-headline font-medium tracking-tight text-base focus:outline-none">
+        <div class="relative w-10 h-10 rounded-full p-[2px] bg-gradient-to-tr from-accent to-zinc-600 group-hover:scale-105 transition-transform shrink-0 shadow-[0_0_12px_rgba(210,232,35,0.25)]">
+          <img src="75d14f35-15de-40fd-86b9-4a805a6ffb53.png" alt="Aaditya Kansakar" class="w-full h-full rounded-full object-cover bg-surface" onerror="this.src='https://placehold.co/100x100/111216/d2e823?text=AK'">
+        </div>
+        <span class="font-semibold tracking-tight text-headline group-hover:text-accent transition-colors">Aaditya Kansakar</span>
+      </a>
+
+      <!-- Desktop Nav -->
+      <nav class="hidden md:flex items-center gap-7 text-sm font-medium text-body">
+        <a href="#hero" class="hover:text-headline transition-colors">Home</a>
+        <a href="#about" class="hover:text-headline transition-colors">About</a>
+        <a href="#skills" class="hover:text-headline transition-colors">Skills</a>
+        <a href="#projects" class="hover:text-headline transition-colors">Projects</a>
+        <a href="#services" class="hover:text-headline transition-colors">Services</a>
+        <a href="#contact" class="hover:text-headline transition-colors">Contact</a>
+      </nav>
+
+      <!-- CTA Button & Mobile Trigger -->
+      <div class="flex items-center gap-3">
+        <a href="#contact" class="btn-magnetic hidden sm:inline-flex items-center justify-center px-4 py-2 text-xs font-semibold uppercase tracking-wider text-black bg-headline hover:bg-accent hover:text-black transition-all rounded-md">
+          Let's Work Together
+        </a>
+        
+        <button id="mobile-menu-btn" aria-label="Toggle navigation menu" class="md:hidden p-2 text-body hover:text-headline rounded-lg border border-border hover:border-accent transition-colors">
+          <svg id="menu-icon" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M4 6h16M4 12h16M4 18h16"></path>
+          </svg>
+          <svg id="close-icon" class="w-5 h-5 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M6 18L18 6M6 6l12 12"></path>
+          </svg>
+        </button>
+      </div>
+
+    </div>
+
+    <!-- Mobile Navigation Drawer -->
+    <div id="mobile-menu" class="hidden md:hidden border-b border-border bg-surface px-6 py-6 transition-all duration-300">
+      <div class="flex flex-col gap-4 text-base font-medium">
+        <a href="#hero" class="mobile-nav-link text-headline py-1 hover:text-accent transition-colors">Home</a>
+        <a href="#about" class="mobile-nav-link text-headline py-1 hover:text-accent transition-colors">About</a>
+        <a href="#skills" class="mobile-nav-link text-headline py-1 hover:text-accent transition-colors">Skills</a>
+        <a href="#projects" class="mobile-nav-link text-headline py-1 hover:text-accent transition-colors">Projects</a>
+        <a href="#services" class="mobile-nav-link text-headline py-1 hover:text-accent transition-colors">Services</a>
+        <a href="#contact" class="mobile-nav-link text-headline py-1 hover:text-accent transition-colors">Contact</a>
+        <div class="pt-3 border-t border-border">
+          <a href="#contact" class="mobile-nav-link w-full inline-block text-center py-2.5 text-xs font-semibold uppercase tracking-wider text-black bg-accent rounded-md hover:brightness-110 transition-all">
+            Let's Work Together
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section id="hero" class="relative pt-32 pb-20 md:pt-40 md:pb-32 px-5 sm:px-8 max-w-6xl mx-auto flex flex-col justify-center min-h-[92vh]">
+      
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+        <!-- Left: Statement & Pitch -->
+        <div class="lg:col-span-7 flex flex-col items-start">
+          
+          <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-surface border border-border text-[11px] font-mono font-medium tracking-wider uppercase text-zinc-300 mb-6 hover:border-accent/40 transition-colors">
+            <span class="w-1.5 h-1.5 rounded-full bg-accent animate-pulse"></span>
+            WEB DEVELOPER • CREATIVE DESIGNER
+          </div>
+
+          <h1 class="text-4xl sm:text-5xl lg:text-[3.5rem] leading-[1.12] font-bold text-headline tracking-tight mb-6">
+            Aaditya Kansakar — Crafting purposeful digital experiences through code &amp; creative design.
+          </h1>
+
+          <p class="text-base sm:text-lg text-body font-normal leading-relaxed max-w-xl mb-9">
+            I'm Aaditya, a web developer and creative designer focused on building modern websites, interactive experiences, and visually polished digital products.
+          </p>
+
+          <div class="flex flex-wrap items-center gap-4 w-full sm:w-auto">
+            <a href="#projects" class="btn-magnetic w-full sm:w-auto inline-flex items-center justify-center px-6 py-3.5 text-sm font-semibold text-black bg-headline hover:bg-accent rounded-lg transition-all duration-200 group">
+              View My Work
+              <svg class="ml-2 w-4 h-4 transform group-hover:translate-y-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+              </svg>
+            </a>
+            <a href="#contact" class="btn-magnetic w-full sm:w-auto inline-flex items-center justify-center px-6 py-3.5 text-sm font-semibold text-headline bg-surface hover:bg-surface-hover border border-border hover:border-accent/50 rounded-lg transition-all duration-200">
+              Let's Connect
+            </a>
+          </div>
+
+          <div class="mt-10 flex items-center gap-2.5 text-xs text-zinc-400 font-mono hover:text-zinc-200 transition-colors">
+            <span class="relative flex h-2 w-2">
+              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+              <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+            </span>
+            Available for new opportunities &amp; freelance projects
+          </div>
+        </div>
+
+        <!-- Right: 3D Tilt Developer Mockup -->
+        <div class="lg:col-span-5 relative" id="hero-card-container">
+          <div id="hero-interactive-card" class="rounded-xl border border-border bg-surface/90 shadow-2xl p-5 md:p-6 backdrop-blur transition-all duration-300 ease-out hover:border-accent/40 hover:shadow-[0_20px_40px_-15px_rgba(0,0,0,0.8)]">
+            
+            <div class="flex items-center justify-between pb-4 mb-4 border-b border-border/70">
+              <div class="flex items-center gap-1.5">
+                <button onclick="openModalInfo('developerConfig')" class="w-3 h-3 rounded-full bg-rose-500/80 hover:brightness-125 transition-all" title="View Config"></button>
+                <button onclick="openModalInfo('developerConfig')" class="w-3 h-3 rounded-full bg-amber-500/80 hover:brightness-125 transition-all" title="View Toolkit"></button>
+                <button onclick="openModalInfo('developerConfig')" class="w-3 h-3 rounded-full bg-emerald-500/80 hover:brightness-125 transition-all" title="View Status"></button>
+              </div>
+              <span class="text-[11px] font-mono text-zinc-400 tracking-tight">aaditya.config.js</span>
+              <button onclick="openModalInfo('developerConfig')" class="text-[10px] font-mono px-2 py-0.5 rounded bg-zinc-800 text-accent border border-accent/20 hover:bg-accent hover:text-black transition-all">
+                ● Specs
+              </button>
+            </div>
+
+            <div class="font-mono text-xs leading-relaxed space-y-1.5 text-zinc-300">
+              <p><span class="text-purple-400">const</span> <span class="text-sky-300">creator</span> = {</p>
+              <p class="pl-4">name: <span class="text-emerald-300">'Aaditya Kansakar'</span>,</p>
+              <p class="pl-4">roles: [<span class="text-emerald-300">'Developer'</span>, <span class="text-emerald-300">'Designer'</span>],</p>
+              <p class="pl-4">phone: <span class="text-accent">'+977 9845167499'</span>,</p>
+              <p class="pl-4">email: <span class="text-emerald-300">'aadityakansakar@gmail.com'</span>,</p>
+              <p class="pl-4">openToWork: <span class="text-purple-400">true</span>,</p>
+              <p class="-ml-2">};</p>
+            </div>
+
+            <div onclick="openModalInfo('uiEngine')" class="mt-4 rounded-lg bg-canvas border border-border/80 p-3 h-36 flex flex-col justify-between overflow-hidden relative group cursor-pointer hover:border-accent/40 transition-colors">
+              <div class="flex items-center justify-between text-[10px] font-mono text-zinc-400">
+                <span>UI_NODE_TREE</span>
+                <span class="text-accent font-medium group-hover:scale-105 transition-transform">Inspect Specs ➔</span>
+              </div>
+              
+              <div class="space-y-2 py-1">
+                <div class="h-2 rounded bg-zinc-800 w-3/4 flex items-center overflow-hidden">
+                  <div class="h-full bg-accent/70 rounded transition-all duration-500 w-2/3 group-hover:w-full group-hover:bg-accent"></div>
+                </div>
+                <div class="h-2 rounded bg-zinc-800 w-1/2 flex items-center overflow-hidden">
+                  <div class="h-full bg-zinc-500 rounded transition-all duration-500 w-1/2 group-hover:w-4/5 group-hover:bg-sky-400"></div>
+                </div>
+                <div class="h-2 rounded bg-zinc-800 w-5/6 flex items-center overflow-hidden">
+                  <div class="h-full bg-zinc-600 rounded transition-all duration-500 w-3/4 group-hover:w-full group-hover:bg-emerald-400"></div>
+                </div>
+              </div>
+
+              <div class="flex items-center justify-between text-[11px] font-mono text-zinc-400 pt-1 border-t border-border/40">
+                <span class="group-hover:text-zinc-200 transition-colors">Architecture: Fluid Vanilla</span>
+                <span class="text-accent font-mono text-[10px]">Click to Inspect</span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <section id="about" class="py-24 px-5 sm:px-8 max-w-6xl mx-auto border-t border-border">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+        
+        <div class="lg:col-span-4">
+          <span class="text-xs font-mono uppercase tracking-widest text-zinc-400 block mb-2">01 / BACKGROUND</span>
+          <h2 class="text-3xl font-bold text-headline tracking-tight">A little about me.</h2>
+        </div>
+
+        <div class="lg:col-span-8 space-y-6 text-base sm:text-lg leading-relaxed text-body">
+          <p>
+            I am a web developer and creative designer passionate about building thoughtful digital products. Rather than relying on rigid templates or exaggerated titles, I believe the best work comes from understanding fundamentals, caring about typography, and obsessing over how things look and feel in real browsers.
+          </p>
+          <p>
+            My work spans across the bridge between engineering and creative direction: from developing responsive layouts with clean <strong class="text-headline font-medium hover:text-accent transition-colors">HTML, CSS, and modern JavaScript</strong> to crafting user interfaces in <strong class="text-headline font-medium hover:text-accent transition-colors">Figma</strong>, producing digital graphic assets, and editing short-form video content.
+          </p>
+          <p>
+            I approach development through the lens of curiosity—learning by building, breaking things down to understand how they work under the hood, and continuously polishing every detail.
+          </p>
+
+          <div class="spotlight-card mt-8 p-6 rounded-xl bg-surface border border-border">
+            <span class="text-xs font-mono uppercase tracking-wider text-accent block mb-2 relative z-10">Core Mindset</span>
+            <blockquote class="text-xl sm:text-2xl font-semibold text-headline tracking-tight relative z-10">
+              “Learn. Build. Break. Improve. Repeat.”
+            </blockquote>
+            <p class="text-sm text-zinc-400 mt-2 font-normal relative z-10">
+              A commitment to honest progress, steady problem solving, and hands-on craftsmanship.
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <section id="skills" class="py-24 px-5 sm:px-8 max-w-6xl mx-auto border-t border-border">
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-16">
+        <div>
+          <span class="text-xs font-mono uppercase tracking-widest text-zinc-400 block mb-2">02 / CAPABILITIES</span>
+          <h2 class="text-3xl sm:text-4xl font-bold text-headline tracking-tight">Skills &amp; Tools</h2>
+        </div>
+        <p class="text-sm text-zinc-400 font-mono mt-3 md:mt-0 flex items-center gap-2">
+          <span class="w-2 h-2 rounded-full bg-accent animate-pulse inline-block"></span>
+          Click any badge for interactive details
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        
+        <!-- Development Card -->
+        <div class="spotlight-card p-7 rounded-xl bg-surface border border-border flex flex-col justify-between group">
+          <div class="relative z-10">
+            <div class="w-10 h-10 rounded-lg bg-surface-elevated border border-border flex items-center justify-center text-accent mb-6 group-hover:scale-110 group-hover:border-accent transition-all duration-300">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold text-headline mb-2 group-hover:text-accent transition-colors">Development &amp; Version Control</h3>
+            <p class="text-sm text-zinc-400 mb-6 leading-relaxed">
+              Writing structured markup, responsive styles, clean client-side JavaScript, and collaborating with Git &amp; GitHub workflows.
+            </p>
+          </div>
+          
+          <div class="grid grid-cols-2 gap-2.5 pt-4 border-t border-border/60 relative z-10">
+            <button onclick="openSkillModal('html')" class="hover-lift flex items-center gap-2 px-2.5 py-1.5 rounded-lg bg-surface-elevated border border-border/70 text-left w-full">
+              <svg class="w-4 h-4 text-orange-500 shrink-0" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M3 2l1.8 17.8L12 22l7.2-2.2L21 2H3zm14.7 5.4h-9l.2 2.4h8.6l-.6 6.3-4.9 1.4-4.9-1.4-.3-3.3h2.3l.2 1.6 2.7.7 2.7-.7.3-3H7.6L7 4.2h11l-.3 3.2z"/>
+              </svg>
+              <span class="text-xs font-mono text-zinc-300">HTML5</span>
+            </button>
+
+            <button onclick="openSkillModal('css')" class="hover-lift flex items-center gap-2 px-2.5 py-1.5 rounded-lg bg-surface-elevated border border-border/70 text-left w-full">
+              <svg class="w-4 h-4 text-sky-400 shrink-0" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M3 2l1.8 17.8L12 22l7.2-2.2L21 2H3zm14.8 5.4h-9l.2 2.4h8.6l-.6 6.3-4.9 1.4-4.9-1.4-.3-3.3h2.3l.2 1.6 2.7.7 2.7-.7.3-3H7.6L7 4.2h11.1l-.3 3.2z"/>
+              </svg>
+              <span class="text-xs font-mono text-zinc-300">CSS3</span>
+            </button>
+
+            <button onclick="openSkillModal('javascript')" class="hover-lift flex items-center gap-2 px-2.5 py-1.5 rounded-lg bg-surface-elevated border border-border/70 text-left w-full">
+              <svg class="w-4 h-4 text-yellow-400 shrink-0" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M3 3h18v18H3V3zm14.8 13.7c-.5.8-1.3 1.3-2.3 1.3-1.6 0-2.4-1-2.4-2.5v-.2h2.2c0 .7.3 1.1.9 1.1.5 0 .8-.3.8-.7 0-.5-.3-.7-1.4-1.1-1.8-.6-2.5-1.4-2.5-2.6 0-1.4 1-2.4 2.6-2.4 1.3 0 2.2.6 2.5 1.7l-2 .6c-.2-.5-.4-.7-.8-.7s-.6.2-.6.5c0 .4.3.6 1.3 1 1.9.6 2.7 1.3 2.7 2.6 0 .5-.2 1-.5 1.5zM10.8 16c-.3.6-.9 1-1.7 1-.9 0-1.5-.5-1.7-1.3-.1-.3-.1-.7-.1-1.7V9.7h2.2v4.8c0 .5.1.7.3.7.2 0 .4-.2.5-.5V9.7h2.2V15c0 .4-.1.7-.2 1z"/>
+              </svg>
+              <span class="text-xs font-mono text-zinc-300">JavaScript</span>
+            </button>
+
+            <button onclick="openSkillModal('github')" class="hover-lift flex items-center gap-2 px-2.5 py-1.5 rounded-lg bg-surface-elevated border border-border/70 text-left w-full">
+              <svg class="w-4 h-4 text-white shrink-0" viewBox="0 0 24 24" fill="currentColor">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
+              </svg>
+              <span class="text-xs font-mono text-zinc-300">GitHub</span>
+            </button>
+
+            <button onclick="openSkillModal('react')" class="hover-lift flex items-center gap-2 px-2.5 py-1.5 rounded-lg bg-surface-elevated border border-border/70 text-left w-full">
+              <svg class="w-4 h-4 text-cyan-400 shrink-0" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 9.5a2.5 2.5 0 100 5 2.5 2.5 0 000-5zm0-7c-4.4 0-8.5 1.7-10.4 4.5-.4.6-.3 1.4.3 1.8.6.4 1.4.3 1.8-.3C5.1 6.3 8.3 5 12 5c3.7 0 6.9 1.3 8.3 3.5.4.6 1.2.7 1.8.3.6-.4.7-1.2.3-1.8-1.9-2.8-6-4.5-10.4-4.5zM2.8 16.2c-.6-.4-1.4-.3-1.8.3-.4.6-.3 1.4.3 1.8 1.9 2.8 6 4.5 10.7 4.5 4.7 0 8.8-1.7 10.7-4.5.4-.6.3-1.4-.3-1.8-.6-.4-1.4-.3-1.8.3-1.4 2.2-4.6 3.5-8.6 3.5-4 0-7.2-1.3-8.6-3.5-.2-.3-.4-.5-.6-.6z"/>
+              </svg>
+              <span class="text-xs font-mono text-zinc-300">React</span>
+            </button>
+
+            <button onclick="openSkillModal('responsive')" class="hover-lift flex items-center gap-2 px-2.5 py-1.5 rounded-lg bg-surface-elevated border border-border/70 text-left w-full">
+              <svg class="w-4 h-4 text-emerald-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
+              </svg>
+              <span class="text-xs font-mono text-zinc-300">Responsive</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Design Card -->
+        <div class="spotlight-card p-7 rounded-xl bg-surface border border-border flex flex-col justify-between group">
+          <div class="relative z-10">
+            <div class="w-10 h-10 rounded-lg bg-surface-elevated border border-border flex items-center justify-center text-accent mb-6 group-hover:scale-110 group-hover:border-accent transition-all duration-300">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"></path>
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold text-headline mb-2 group-hover:text-accent transition-colors">Design &amp; Visual Systems</h3>
+            <p class="text-sm text-zinc-400 mb-6 leading-relaxed">
+              Designing user-friendly interfaces, establishing typography systems, and building design prototypes in Figma.
+            </p>
+          </div>
+          
+          <div class="grid grid-cols-2 gap-2.5 pt-4 border-t border-border/60 relative z-10">
+            <button onclick="openSkillModal('figma')" class="hover-lift flex items-center gap-2 px-2.5 py-1.5 rounded-lg bg-surface-elevated border border-border/70 text-left w-full">
+              <svg class="w-4 h-4 text-purple-400 shrink-0" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M8 2h8a4 4 0 014 4v0a4 4 0 01-4 4H8a4 4 0 01-4-4v0a4 4 0 014-4zm0 8h4v4H8a4 4 0 01-4-4v0a4 4 0 014-4zm8 0a4 4 0 110 8h-4v-8h4zm-4 4v4a4 4 0 01-4 4 4 4 0 01-4-4v-4h8z"/>
+              </svg>
+              <span class="text-xs font-mono text-zinc-300">Figma</span>
+            </button>
+
+            <button onclick="openSkillModal('uidesign')" class="hover-lift flex items-center gap-2 px-2.5 py-1.5 rounded-lg bg-surface-elevated border border-border/70 text-left w-full">
+              <svg class="w-4 h-4 text-pink-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"></path>
+              </svg>
+              <span class="text-xs font-mono text-zinc-300">UI Design</span>
+            </button>
+
+            <button onclick="openSkillModal('graphicdesign')" class="hover-lift flex items-center gap-2 px-2.5 py-1.5 rounded-lg bg-surface-elevated border border-border/70 text-left w-full">
+              <svg class="w-4 h-4 text-amber-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path>
+              </svg>
+              <span class="text-xs font-mono text-zinc-300">Graphic</span>
+            </button>
+
+            <button onclick="openSkillModal('composition')" class="hover-lift flex items-center gap-2 px-2.5 py-1.5 rounded-lg bg-surface-elevated border border-border/70 text-left w-full">
+              <svg class="w-4 h-4 text-indigo-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
+              </svg>
+              <span class="text-xs font-mono text-zinc-300">Composition</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Creative & Motion Card -->
+        <div class="spotlight-card p-7 rounded-xl bg-surface border border-border flex flex-col justify-between group">
+          <div class="relative z-10">
+            <div class="w-10 h-10 rounded-lg bg-surface-elevated border border-border flex items-center justify-center text-accent mb-6 group-hover:scale-110 group-hover:border-accent transition-all duration-300">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold text-headline mb-2 group-hover:text-accent transition-colors">Creative &amp; Motion</h3>
+            <p class="text-sm text-zinc-400 mb-6 leading-relaxed">
+              Curating multimedia elements, editing video content, and implementing smooth web interaction cues.
+            </p>
+          </div>
+          
+          <div class="grid grid-cols-2 gap-2.5 pt-4 border-t border-border/60 relative z-10">
+            <button onclick="openSkillModal('videoediting')" class="hover-lift flex items-center gap-2 px-2.5 py-1.5 rounded-lg bg-surface-elevated border border-border/70 text-left w-full">
+              <svg class="w-4 h-4 text-red-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 4v16M17 4v16M3 8h4m10 0h4M3 12h18M3 16h4m10 0h4M4 20h16a1 1 0 001-1V5a1 1 0 00-1-1H4a1 1 0 00-1 1v14a1 1 0 001 1z"></path>
+              </svg>
+              <span class="text-xs font-mono text-zinc-300">Video Edit</span>
+            </button>
+
+            <button onclick="openSkillModal('motionui')" class="hover-lift flex items-center gap-2 px-2.5 py-1.5 rounded-lg bg-surface-elevated border border-border/70 text-left w-full">
+              <svg class="w-4 h-4 text-teal-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+              </svg>
+              <span class="text-xs font-mono text-zinc-300">Motion UI</span>
+            </button>
+
+            <button onclick="openSkillModal('interactiveweb')" class="hover-lift flex items-center gap-2 px-2.5 py-1.5 rounded-lg bg-surface-elevated border border-border/70 col-span-2 text-left w-full">
+              <svg class="w-4 h-4 text-accent shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122"></path>
+              </svg>
+              <span class="text-xs font-mono text-zinc-300">Interactive Experiences</span>
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <section id="projects" class="py-24 px-5 sm:px-8 max-w-6xl mx-auto border-t border-border">
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-16">
+        <div>
+          <span class="text-xs font-mono uppercase tracking-widest text-zinc-400 block mb-2">03 / SELECTED WORK</span>
+          <h2 class="text-3xl sm:text-4xl font-bold text-headline tracking-tight">Featured Projects</h2>
+        </div>
+        <p class="text-sm text-zinc-400 font-mono mt-3 md:mt-0">
+          Click any Case Study button for in-depth breakdown
+        </p>
+      </div>
+
+      <div class="space-y-12">
+        
+        <!-- Project 01: Purnima Suppliers -->
+        <article class="spotlight-card p-6 sm:p-8 rounded-2xl bg-surface border border-border group cursor-pointer" onclick="openCaseStudy('purnima')">
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-10">
+            
+            <div class="project-preview lg:col-span-7 rounded-xl bg-canvas border border-border overflow-hidden p-4 relative">
+              <div class="flex items-center justify-between pb-3 border-b border-border/60 mb-3 text-xs font-mono text-zinc-400">
+                <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-accent inline-block"></span> purnima-suppliers.web</span>
+                <span class="text-zinc-400 group-hover:text-accent transition-colors">Wholesale Concept</span>
+              </div>
+              
+              <div class="bg-surface-elevated rounded-lg p-4 space-y-3">
+                <div class="flex items-center justify-between pb-2 border-b border-border/50">
+                  <div class="h-3 w-28 bg-zinc-700 rounded"></div>
+                  <div class="h-3 w-40 bg-zinc-800 rounded hidden sm:block"></div>
+                </div>
+                <div class="grid grid-cols-3 gap-3">
+                  <div class="hover-lift bg-surface p-3 rounded border border-border/60 flex flex-col justify-between h-28">
+                    <div class="h-10 bg-zinc-800/80 rounded mb-2"></div>
+                    <div class="h-2 w-12 bg-zinc-700 rounded"></div>
+                    <div class="h-2 w-16 bg-accent/40 rounded"></div>
+                  </div>
+                  <div class="hover-lift bg-surface p-3 rounded border border-border/60 flex flex-col justify-between h-28">
+                    <div class="h-10 bg-zinc-800/80 rounded mb-2"></div>
+                    <div class="h-2 w-14 bg-zinc-700 rounded"></div>
+                    <div class="h-2 w-16 bg-accent/40 rounded"></div>
+                  </div>
+                  <div class="hover-lift bg-surface p-3 rounded border border-border/60 flex flex-col justify-between h-28">
+                    <div class="h-10 bg-zinc-800/80 rounded mb-2"></div>
+                    <div class="h-2 w-10 bg-zinc-700 rounded"></div>
+                    <div class="h-2 w-16 bg-accent/40 rounded"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="lg:col-span-5 flex flex-col justify-between">
+              <div>
+                <span class="text-xs font-mono text-accent uppercase tracking-wider block mb-2">01 — Web Application Concept</span>
+                <h3 class="text-2xl font-bold text-headline tracking-tight mb-3 group-hover:text-accent transition-colors">Purnima Suppliers</h3>
+                <p class="text-sm text-body leading-relaxed mb-6">
+                  An ecommerce-style wholesale supplier concept engineered with pure HTML, CSS, and JavaScript. Built to handle inventory filtering, category navigation, dynamic product cards, and responsive order inquiry workflows.
+                </p>
+                <div class="flex flex-wrap gap-2 mb-8">
+                  <span class="hover-lift text-xs font-mono px-2.5 py-1 rounded bg-surface-elevated text-zinc-300 border border-border">HTML5</span>
+                  <span class="hover-lift text-xs font-mono px-2.5 py-1 rounded bg-surface-elevated text-zinc-300 border border-border">CSS Grid / Flexbox</span>
+                  <span class="hover-lift text-xs font-mono px-2.5 py-1 rounded bg-surface-elevated text-zinc-300 border border-border">JavaScript</span>
+                </div>
+              </div>
+              <div class="flex items-center gap-3" onclick="event.stopPropagation()">
+                <button onclick="openCaseStudy('purnima')" class="btn-magnetic inline-flex items-center justify-center px-4 py-2.5 text-xs font-semibold uppercase tracking-wider text-headline bg-surface-elevated hover:bg-surface-hover border border-border hover:border-accent rounded-lg">
+                  Case Study
+                </button>
+                <a href="#contact" class="btn-magnetic inline-flex items-center justify-center px-4 py-2.5 text-xs font-semibold uppercase tracking-wider text-black bg-headline hover:bg-accent rounded-lg">
+                  Inquire Code
+                </a>
+              </div>
+            </div>
+
+          </div>
+        </article>
+
+        <!-- Project 02: Interactive Portfolio -->
+        <article class="spotlight-card p-6 sm:p-8 rounded-2xl bg-surface border border-border group cursor-pointer" onclick="openCaseStudy('portfolio')">
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-10">
+            
+            <div class="project-preview lg:col-span-7 rounded-xl bg-canvas border border-border overflow-hidden p-4 relative">
+              <div class="flex items-center justify-between pb-3 border-b border-border/60 mb-3 text-xs font-mono text-zinc-400">
+                <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-accent inline-block"></span> portfolio.experience</span>
+                <span class="text-zinc-400 group-hover:text-accent transition-colors">Interaction Engine</span>
+              </div>
+              
+              <div class="bg-surface-elevated rounded-lg p-5 space-y-4">
+                <div class="h-5 w-44 bg-zinc-700 rounded"></div>
+                <div class="h-3 w-full bg-zinc-800 rounded"></div>
+                <div class="grid grid-cols-2 gap-3 pt-2">
+                  <div class="hover-lift p-3 bg-surface rounded border border-border">
+                    <span class="text-[10px] font-mono text-accent">SMOOTH_SCROLL: ENABLED</span>
+                    <div class="h-2 w-16 bg-zinc-700 rounded mt-2"></div>
+                  </div>
+                  <div class="hover-lift p-3 bg-surface rounded border border-border">
+                    <span class="text-[10px] font-mono text-sky-400">MODAL_SYSTEM: ACTIVE</span>
+                    <div class="h-2 w-16 bg-zinc-700 rounded mt-2"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="lg:col-span-5 flex flex-col justify-between">
+              <div>
+                <span class="text-xs font-mono text-accent uppercase tracking-wider block mb-2">02 — Personal Experience</span>
+                <h3 class="text-2xl font-bold text-headline tracking-tight mb-3 group-hover:text-accent transition-colors">Interactive Portfolio</h3>
+                <p class="text-sm text-body leading-relaxed mb-6">
+                  A bespoke personal website built with precision typography, lightweight micro-interactions, responsive centered modal architecture, and direct contact tools.
+                </p>
+                <div class="flex flex-wrap gap-2 mb-8">
+                  <span class="hover-lift text-xs font-mono px-2.5 py-1 rounded bg-surface-elevated text-zinc-300 border border-border">Vanilla JS</span>
+                  <span class="hover-lift text-xs font-mono px-2.5 py-1 rounded bg-surface-elevated text-zinc-300 border border-border">Tailwind Architecture</span>
+                  <span class="hover-lift text-xs font-mono px-2.5 py-1 rounded bg-surface-elevated text-zinc-300 border border-border">Custom Cursor</span>
+                </div>
+              </div>
+              <div class="flex items-center gap-3" onclick="event.stopPropagation()">
+                <button onclick="openCaseStudy('portfolio')" class="btn-magnetic inline-flex items-center justify-center px-4 py-2.5 text-xs font-semibold uppercase tracking-wider text-headline bg-surface-elevated hover:bg-surface-hover border border-border hover:border-accent rounded-lg">
+                  Case Study
+                </button>
+                <a href="#hero" class="btn-magnetic inline-flex items-center justify-center px-4 py-2.5 text-xs font-semibold uppercase tracking-wider text-black bg-headline hover:bg-accent rounded-lg">
+                  Current View
+                </a>
+              </div>
+            </div>
+
+          </div>
+        </article>
+
+        <!-- Project 03: Creative Interactive Web Experience -->
+        <article class="spotlight-card p-6 sm:p-8 rounded-2xl bg-surface border border-border group cursor-pointer" onclick="openCaseStudy('creative')">
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-10">
+            
+            <div class="project-preview lg:col-span-7 rounded-xl bg-canvas border border-border overflow-hidden p-4 relative">
+              <div class="flex items-center justify-between pb-3 border-b border-border/60 mb-3 text-xs font-mono text-zinc-400">
+                <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-accent inline-block"></span> cinematech.lab</span>
+                <span class="text-zinc-400 group-hover:text-accent transition-colors">Experimental Motion Lab</span>
+              </div>
+              
+              <div class="bg-surface-elevated rounded-lg p-5 relative overflow-hidden">
+                <div class="flex items-center justify-between mb-4">
+                  <div class="h-2 w-16 bg-accent rounded"></div>
+                  <div class="text-[10px] font-mono text-zinc-400">COORD: 42.10 // 88.02</div>
+                </div>
+                <div class="border border-dashed border-zinc-700 p-4 rounded text-center my-2 group-hover:border-accent/60 transition-colors">
+                  <div class="text-xs font-mono text-zinc-300 mb-1">CINEMATIC_INTERFACE_SYSTEM</div>
+                  <div class="text-[11px] text-zinc-400 font-mono">Dynamic Cursor Feedback • Ambient Light Model</div>
+                </div>
+                <div class="h-1.5 w-full bg-zinc-800 rounded mt-3"></div>
+              </div>
+            </div>
+
+            <div class="lg:col-span-5 flex flex-col justify-between">
+              <div>
+                <span class="text-xs font-mono text-accent uppercase tracking-wider block mb-2">03 — Creative Lab</span>
+                <h3 class="text-2xl font-bold text-headline tracking-tight mb-3 group-hover:text-accent transition-colors">Creative Interactive Experience</h3>
+                <p class="text-sm text-body leading-relaxed mb-6">
+                  A futuristic interactive website concept inspired by cinematic visual interfaces, motion-driven navigation, experimental layouts, and dark atmospheric presentation.
+                </p>
+                <div class="flex flex-wrap gap-2 mb-8">
+                  <span class="hover-lift text-xs font-mono px-2.5 py-1 rounded bg-surface-elevated text-zinc-300 border border-border">Canvas API</span>
+                  <span class="hover-lift text-xs font-mono px-2.5 py-1 rounded bg-surface-elevated text-zinc-300 border border-border">CSS Keyframes</span>
+                  <span class="hover-lift text-xs font-mono px-2.5 py-1 rounded bg-surface-elevated text-zinc-300 border border-border">Visual Storytelling</span>
+                </div>
+              </div>
+              <div class="flex items-center gap-3" onclick="event.stopPropagation()">
+                <button onclick="openCaseStudy('creative')" class="btn-magnetic inline-flex items-center justify-center px-4 py-2.5 text-xs font-semibold uppercase tracking-wider text-headline bg-surface-elevated hover:bg-surface-hover border border-border hover:border-accent rounded-lg">
+                  Case Study
+                </button>
+                <a href="#contact" class="btn-magnetic inline-flex items-center justify-center px-4 py-2.5 text-xs font-semibold uppercase tracking-wider text-black bg-headline hover:bg-accent rounded-lg">
+                  Discuss Concept
+                </a>
+              </div>
+            </div>
+
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <section id="services" class="py-24 px-5 sm:px-8 max-w-6xl mx-auto border-t border-border">
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-16">
+        <div>
+          <span class="text-xs font-mono uppercase tracking-widest text-zinc-400 block mb-2">04 / OFFERINGS</span>
+          <h2 class="text-3xl sm:text-4xl font-bold text-headline tracking-tight">What I Can Build</h2>
+        </div>
+        <p class="text-sm text-zinc-400 font-mono mt-3 md:mt-0 flex items-center gap-2">
+          <span class="w-2 h-2 rounded-full bg-accent animate-pulse inline-block"></span>
+          Click any card for service scope &amp; deliverables
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        
+        <!-- Service 1 -->
+        <div onclick="openServiceModal('websites')" class="spotlight-card p-6 rounded-xl bg-surface border border-border flex flex-col justify-between group cursor-pointer">
+          <div class="relative z-10">
+            <div class="w-8 h-8 rounded bg-surface-elevated border border-border flex items-center justify-center text-accent text-xs font-mono font-bold mb-4 group-hover:scale-110 group-hover:border-accent transition-transform">
+              01
+            </div>
+            <h3 class="text-lg font-bold text-headline mb-2 group-hover:text-accent transition-colors flex items-center justify-between">
+              Websites
+              <span class="text-xs font-mono text-accent opacity-0 group-hover:opacity-100 transition-opacity">Details ➔</span>
+            </h3>
+            <p class="text-sm text-body leading-relaxed">
+              Responsive websites with clean layouts, strict accessibility practices, and modern UI that loads rapidly on all screen sizes.
+            </p>
+          </div>
+          <span class="text-xs font-mono text-zinc-400 pt-6 mt-6 border-t border-border/50 block relative z-10 group-hover:text-zinc-300">Responsive • Fast • Semantics</span>
+        </div>
+
+        <!-- Service 2 -->
+        <div onclick="openServiceModal('uidesign')" class="spotlight-card p-6 rounded-xl bg-surface border border-border flex flex-col justify-between group cursor-pointer">
+          <div class="relative z-10">
+            <div class="w-8 h-8 rounded bg-surface-elevated border border-border flex items-center justify-center text-accent text-xs font-mono font-bold mb-4 group-hover:scale-110 group-hover:border-accent transition-transform">
+              02
+            </div>
+            <h3 class="text-lg font-bold text-headline mb-2 group-hover:text-accent transition-colors flex items-center justify-between">
+              UI Design
+              <span class="text-xs font-mono text-accent opacity-0 group-hover:opacity-100 transition-opacity">Details ➔</span>
+            </h3>
+            <p class="text-sm text-body leading-relaxed">
+              Intuitive interfaces, design mockups, and structured component libraries designed systematically inside Figma.
+            </p>
+          </div>
+          <span class="text-xs font-mono text-zinc-400 pt-6 mt-6 border-t border-border/50 block relative z-10 group-hover:text-zinc-300">Figma • Systems • Layouts</span>
+        </div>
+
+        <!-- Service 3 -->
+        <div onclick="openServiceModal('creativeweb')" class="spotlight-card p-6 rounded-xl bg-surface border border-border flex flex-col justify-between group cursor-pointer">
+          <div class="relative z-10">
+            <div class="w-8 h-8 rounded bg-surface-elevated border border-border flex items-center justify-center text-accent text-xs font-mono font-bold mb-4 group-hover:scale-110 group-hover:border-accent transition-transform">
+              03
+            </div>
+            <h3 class="text-lg font-bold text-headline mb-2 group-hover:text-accent transition-colors flex items-center justify-between">
+              Creative Web Experiences
+              <span class="text-xs font-mono text-accent opacity-0 group-hover:opacity-100 transition-opacity">Details ➔</span>
+            </h3>
+            <p class="text-sm text-body leading-relaxed">
+              Interactive websites featuring tasteful animation, motion sequences, and engaging visual storytelling techniques.
+            </p>
+          </div>
+          <span class="text-xs font-mono text-zinc-400 pt-6 mt-6 border-t border-border/50 block relative z-10 group-hover:text-zinc-300">Interaction • Motion • Polish</span>
+        </div>
+
+        <!-- Service 4 -->
+        <div onclick="openServiceModal('graphicdesign')" class="spotlight-card p-6 rounded-xl bg-surface border border-border flex flex-col justify-between group cursor-pointer">
+          <div class="relative z-10">
+            <div class="w-8 h-8 rounded bg-surface-elevated border border-border flex items-center justify-center text-accent text-xs font-mono font-bold mb-4 group-hover:scale-110 group-hover:border-accent transition-transform">
+              04
+            </div>
+            <h3 class="text-lg font-bold text-headline mb-2 group-hover:text-accent transition-colors flex items-center justify-between">
+              Graphic Design
+              <span class="text-xs font-mono text-accent opacity-0 group-hover:opacity-100 transition-opacity">Details ➔</span>
+            </h3>
+            <p class="text-sm text-body leading-relaxed">
+              Clean visual assets, digital banners, editorial layouts, and branding graphics crafted for digital-first initiatives.
+            </p>
+          </div>
+          <span class="text-xs font-mono text-zinc-400 pt-6 mt-6 border-t border-border/50 block relative z-10 group-hover:text-zinc-300">Identity • Visuals • Posters</span>
+        </div>
+
+        <!-- Service 5 -->
+        <div onclick="openServiceModal('videoediting')" class="spotlight-card p-6 rounded-xl bg-surface border border-border flex flex-col justify-between md:col-span-2 lg:col-span-2 group cursor-pointer">
+          <div class="relative z-10">
+            <div class="w-8 h-8 rounded bg-surface-elevated border border-border flex items-center justify-center text-accent text-xs font-mono font-bold mb-4 group-hover:scale-110 group-hover:border-accent transition-transform">
+              05
+            </div>
+            <h3 class="text-lg font-bold text-headline mb-2 group-hover:text-accent transition-colors flex items-center justify-between">
+              Video Editing
+              <span class="text-xs font-mono text-accent opacity-0 group-hover:opacity-100 transition-opacity">Details ➔</span>
+            </h3>
+            <p class="text-sm text-body leading-relaxed">
+              Short-form and creative video editing for digital content, dynamic product teasers, and visual portfolios with precise timing, sound design alignment, and pacing.
+            </p>
+          </div>
+          <span class="text-xs font-mono text-zinc-400 pt-6 mt-6 border-t border-border/50 block relative z-10 group-hover:text-zinc-300">Short-form • Pacing • Storytelling</span>
+        </div>
+
+      </div>
+    </section>
+
+    <section class="py-24 px-5 sm:px-8 max-w-6xl mx-auto border-t border-border">
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-16">
+        <div>
+          <span class="text-xs font-mono uppercase tracking-widest text-zinc-400 block mb-2">05 / ARTIFACTS</span>
+          <h2 class="text-3xl sm:text-4xl font-bold text-headline tracking-tight">Creative Showcase</h2>
+        </div>
+        <p class="text-sm text-zinc-400 font-mono mt-3 md:mt-0 flex items-center gap-2">
+          <span class="w-2 h-2 rounded-full bg-accent animate-pulse inline-block"></span>
+          Click any card for design breakdown
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        
+        <!-- Showcase Item 1: Figma UI Frame -->
+        <div onclick="openShowcaseModal('figmaFrame')" class="spotlight-card rounded-xl bg-surface border border-border p-5 group cursor-pointer">
+          <div class="h-44 rounded-lg bg-canvas border border-border/70 p-3.5 flex flex-col justify-between mb-4 relative overflow-hidden group-hover:border-accent/40 transition-colors">
+            <div class="flex items-center justify-between text-[10px] font-mono text-zinc-400">
+              <span>FIGMA_FRAME // 01</span>
+              <span class="text-accent">AutoLayout</span>
+            </div>
+            <div class="space-y-2">
+              <div class="h-3 w-3/4 bg-zinc-800 rounded group-hover:w-5/6 transition-all duration-300"></div>
+              <div class="h-2 w-1/2 bg-zinc-800/80 rounded group-hover:w-2/3 transition-all duration-300"></div>
+            </div>
+            <div class="flex gap-2">
+              <div class="h-6 w-16 bg-zinc-800 rounded border border-zinc-700/60"></div>
+              <div class="h-6 w-16 bg-accent/20 rounded border border-accent/40 group-hover:bg-accent/30 transition-colors"></div>
+            </div>
+          </div>
+          <h4 class="text-sm font-semibold text-headline group-hover:text-accent transition-colors flex items-center justify-between">
+            Minimal Dashboard Frame
+            <span class="text-[10px] font-mono text-zinc-400">Info ➔</span>
+          </h4>
+          <p class="text-xs text-zinc-400 mt-1">Figma component hierarchy and structural layout test.</p>
+        </div>
+
+        <!-- Showcase Item 2: Graphic Design Typography Poster -->
+        <div onclick="openShowcaseModal('editorialPoster')" class="spotlight-card rounded-xl bg-surface border border-border p-5 group cursor-pointer">
+          <div class="h-44 rounded-lg bg-zinc-950 border border-border/70 p-4 flex flex-col justify-between mb-4 relative group-hover:border-accent/40 transition-colors">
+            <span class="text-[10px] font-mono text-zinc-400">GRAPHIC // POSTER</span>
+            <div class="text-center font-bold tracking-tighter text-2xl text-zinc-300 leading-none group-hover:scale-105 transition-transform duration-300">
+              FORM<br><span class="text-accent">&amp;</span> FLOW
+            </div>
+            <div class="text-[10px] font-mono text-right text-zinc-400">ISSUE_26</div>
+          </div>
+          <h4 class="text-sm font-semibold text-headline group-hover:text-accent transition-colors flex items-center justify-between">
+            Editorial Typography Poster
+            <span class="text-[10px] font-mono text-zinc-400">Info ➔</span>
+          </h4>
+          <p class="text-xs text-zinc-400 mt-1">Exploration of contrast, negative space, and rhythm.</p>
+        </div>
+
+        <!-- Showcase Item 3: Video Reel Concept -->
+        <div onclick="openShowcaseModal('videoMotion')" class="spotlight-card rounded-xl bg-surface border border-border p-5 group cursor-pointer">
+          <div class="h-44 rounded-lg bg-canvas border border-border/70 p-3.5 flex flex-col justify-between mb-4 relative group-hover:border-accent/40 transition-colors">
+            <div class="flex items-center justify-between text-[10px] font-mono text-zinc-400">
+              <span>TIMELINE_SEQ</span>
+              <span class="text-rose-400 animate-pulse">REC 24fps</span>
+            </div>
+            <div class="space-y-1.5 py-1">
+              <div class="h-2.5 rounded bg-zinc-800 flex overflow-hidden">
+                <div class="w-1/3 bg-sky-900/60 border-r border-sky-500/40 group-hover:w-1/2 transition-all duration-300"></div>
+                <div class="w-1/2 bg-amber-900/60 border-r border-amber-500/40"></div>
+              </div>
+              <div class="h-2 rounded bg-zinc-800 flex overflow-hidden">
+                <div class="w-2/3 bg-emerald-900/60 group-hover:w-4/5 transition-all duration-300"></div>
+              </div>
+            </div>
+            <div class="text-[10px] font-mono text-zinc-400">Beat sync &amp; jump-cut alignment</div>
+          </div>
+          <h4 class="text-sm font-semibold text-headline group-hover:text-accent transition-colors flex items-center justify-between">
+            Short-Form Motion Cut
+            <span class="text-[10px] font-mono text-zinc-400">Info ➔</span>
+          </h4>
+          <p class="text-xs text-zinc-400 mt-1">High-tempo pacing and sound design alignment experiment.</p>
+        </div>
+
+      </div>
+    </section>
+
+    <section class="py-16 px-5 sm:px-8 max-w-6xl mx-auto border-t border-border">
+      <div class="flex flex-col sm:flex-row items-center justify-between gap-6 py-6 px-8 rounded-xl bg-surface border border-border">
+        <span class="text-xs font-mono uppercase tracking-widest text-zinc-400 shrink-0">Daily Stack</span>
+        <div class="flex flex-wrap items-center justify-center gap-6 sm:gap-8 text-sm font-mono text-zinc-300">
+          <span class="hover-lift flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-orange-500"></span> HTML5</span>
+          <span class="hover-lift flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-sky-400"></span> CSS3</span>
+          <span class="hover-lift flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-yellow-400"></span> JavaScript</span>
+          <span class="hover-lift flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-cyan-400"></span> React</span>
+          <span class="hover-lift flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-purple-400"></span> Figma</span>
+          <span class="hover-lift flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-white"></span> Git &amp; GitHub</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="journey" class="py-24 px-5 sm:px-8 max-w-6xl mx-auto border-t border-border">
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-16">
+        <div>
+          <span class="text-xs font-mono uppercase tracking-widest text-zinc-400 block mb-2">06 / GROWTH</span>
+          <h2 class="text-3xl sm:text-4xl font-bold text-headline tracking-tight">My Learning Journey</h2>
+        </div>
+        <p class="text-sm text-zinc-400 font-mono mt-3 md:mt-0">
+          Building practical skills through continuous iteration
+        </p>
+      </div>
+
+      <div class="relative border-l border-border/80 pl-6 sm:pl-8 ml-2 sm:ml-4 space-y-12">
+        
+        <div class="relative group">
+          <div class="absolute -left-[31px] sm:-left-[39px] top-1.5 w-3.5 h-3.5 rounded-full bg-surface border-2 border-zinc-600 group-hover:border-accent transition-colors"></div>
+          <span class="text-xs font-mono text-zinc-400 uppercase tracking-widest block mb-1">Phase 01</span>
+          <h3 class="text-lg font-bold text-headline group-hover:text-accent transition-colors">Started</h3>
+          <p class="text-sm text-body mt-2 leading-relaxed max-w-2xl">
+            Sparked by visual storytelling and the web. Started by experimenting with fundamental markup, typography, and color theory.
+          </p>
+        </div>
+
+        <div class="relative group">
+          <div class="absolute -left-[31px] sm:-left-[39px] top-1.5 w-3.5 h-3.5 rounded-full bg-surface border-2 border-zinc-600 group-hover:border-accent transition-colors"></div>
+          <span class="text-xs font-mono text-zinc-400 uppercase tracking-widest block mb-1">Phase 02</span>
+          <h3 class="text-lg font-bold text-headline group-hover:text-accent transition-colors">Learned</h3>
+          <p class="text-sm text-body mt-2 leading-relaxed max-w-2xl">
+            Dove deep into responsive web design, semantic HTML, modern CSS layouts (Flexbox &amp; CSS Grid), and UI design principles inside Figma.
+          </p>
+        </div>
+
+        <div class="relative group">
+          <div class="absolute -left-[31px] sm:-left-[39px] top-1.5 w-3.5 h-3.5 rounded-full bg-surface border-2 border-zinc-600 group-hover:border-accent transition-colors"></div>
+          <span class="text-xs font-mono text-zinc-400 uppercase tracking-widest block mb-1">Phase 03</span>
+          <h3 class="text-lg font-bold text-headline group-hover:text-accent transition-colors">Built</h3>
+          <p class="text-sm text-body mt-2 leading-relaxed max-w-2xl">
+            Created real projects including an ecommerce wholesale concept (Purnima Suppliers), interactive web interfaces, and structured Figma UI design prototypes.
+          </p>
+        </div>
+
+        <div class="relative group">
+          <div class="absolute -left-[31px] sm:-left-[39px] top-1.5 w-3.5 h-3.5 rounded-full bg-surface border-2 border-accent transition-colors"></div>
+          <span class="text-xs font-mono text-accent uppercase tracking-widest block mb-1">Phase 04 — Current</span>
+          <h3 class="text-lg font-bold text-headline group-hover:text-accent transition-colors">Experimented &amp; Improved</h3>
+          <p class="text-sm text-body mt-2 leading-relaxed max-w-2xl">
+            Refining frontend logic with modern JavaScript, exploring motion concepts, polishing layout micro-interactions, and preparing for junior developer and design roles.
+          </p>
+        </div>
+
+      </div>
+    </section>
+
+    <section id="contact" class="py-24 px-5 sm:px-8 max-w-6xl mx-auto border-t border-border">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+        
+        <div class="lg:col-span-5 flex flex-col justify-between">
+          <div>
+            <span class="text-xs font-mono uppercase tracking-widest text-zinc-400 block mb-2">07 / GET IN TOUCH</span>
+            <h2 class="text-3xl sm:text-5xl font-bold text-headline tracking-tight mb-6">Have an idea? Let's build it.</h2>
+            <p class="text-base text-body leading-relaxed mb-8">
+              I'm always interested in learning, creating, and collaborating on interesting digital projects. Whether you have an internship opportunity, freelance inquiry, or just want to discuss frontend ideas, feel free to reach out.
+            </p>
+          </div>
+
+          <div class="space-y-4 pt-4 border-t border-border/80">
+            <!-- Direct Phone Number -->
+            <div class="spotlight-card p-4 rounded-xl bg-surface border border-border">
+              <span class="text-xs font-mono uppercase tracking-wider text-zinc-400 block mb-1">Direct Phone</span>
+              <div class="flex items-center justify-between">
+                <a href="tel:+9779845167499" class="text-base sm:text-lg font-mono font-bold text-headline hover:text-accent transition-colors">
+                  +977 9845167499
+                </a>
+                <div class="flex items-center gap-2">
+                  <a href="tel:+9779845167499" class="btn-magnetic px-3 py-1 text-xs font-mono rounded bg-surface-elevated text-zinc-300 border border-border hover:border-accent">
+                    Call
+                  </a>
+                  <a href="https://wa.me/9779845167499?text=Hi%20Aaditya,%20I%20saw%20your%20portfolio%20and%20would%20like%20to%20connect!" target="_blank" rel="noopener noreferrer" class="btn-magnetic px-3 py-1 text-xs font-mono rounded bg-accent/20 text-accent border border-accent/40 hover:bg-accent hover:text-black">
+                    WhatsApp
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Email Address with Copy -->
+            <div class="spotlight-card p-4 rounded-xl bg-surface border border-border">
+              <span class="text-xs font-mono uppercase tracking-wider text-zinc-400 block mb-1">Email Address</span>
+              <div class="flex items-center justify-between">
+                <a href="mailto:aadityakansakar@gmail.com" class="text-base sm:text-lg font-mono font-medium text-headline hover:text-accent transition-colors break-all">
+                  aadityakansakar@gmail.com
+                </a>
+                <button onclick="copyEmailToClipboard()" class="btn-magnetic px-3 py-1 text-xs font-mono rounded bg-surface-elevated text-zinc-300 border border-border hover:border-accent shrink-0">
+                  <span id="copy-btn-text">Copy</span>
+                </button>
+              </div>
+              <div id="copy-feedback" class="text-[11px] font-mono text-accent mt-2 hidden">✓ Copied to clipboard!</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Contact Form Box -->
+        <div class="lg:col-span-7">
+          <div class="spotlight-card p-6 sm:p-8 rounded-2xl bg-surface border border-border">
+            <h3 class="text-xl font-bold text-headline tracking-tight mb-2">Send a Direct Message</h3>
+            <p class="text-xs text-zinc-400 font-mono mb-6">Fill in the fields below. Responses are sent within 24 hours.</p>
+
+            <form id="portfolio-contact-form" action="https://formspree.io/f/aadityakansakar@gmail.com" method="POST" class="space-y-4">
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label for="contact-name" class="block text-xs font-mono uppercase tracking-wider text-zinc-400 mb-2">Your Name *</label>
+                  <input type="text" id="contact-name" name="name" required placeholder="e.g. Alex Sharma" class="w-full px-4 py-3 rounded-lg bg-surface-elevated border border-border text-sm text-headline focus:outline-none focus:border-accent transition-colors">
+                </div>
+                <div>
+                  <label for="contact-email" class="block text-xs font-mono uppercase tracking-wider text-zinc-400 mb-2">Your Email *</label>
+                  <input type="email" id="contact-email" name="email" required placeholder="alex@example.com" class="w-full px-4 py-3 rounded-lg bg-surface-elevated border border-border text-sm text-headline focus:outline-none focus:border-accent transition-colors">
+                </div>
+              </div>
+
+              <div>
+                <label for="contact-subject" class="block text-xs font-mono uppercase tracking-wider text-zinc-400 mb-2">Subject / Inquiry Type</label>
+                <input type="text" id="contact-subject" name="subject" placeholder="Project Inquiry / Job Opportunity / Collaboration" class="w-full px-4 py-3 rounded-lg bg-surface-elevated border border-border text-sm text-headline focus:outline-none focus:border-accent transition-colors">
+              </div>
+
+              <div>
+                <label for="contact-message" class="block text-xs font-mono uppercase tracking-wider text-zinc-400 mb-2">Message *</label>
+                <textarea id="contact-message" name="message" rows="4" required placeholder="Tell me about your idea, requirements, or timeline..." class="w-full px-4 py-3 rounded-lg bg-surface-elevated border border-border text-sm text-headline focus:outline-none focus:border-accent transition-colors resize-none"></textarea>
+              </div>
+
+              <button type="submit" id="form-submit-btn" class="btn-magnetic w-full py-3.5 px-6 rounded-lg bg-headline hover:bg-accent text-black font-semibold text-xs uppercase tracking-wider transition-colors duration-200">
+                <span id="submit-btn-text">Send Message</span>
+              </button>
+
+              <div id="form-status" class="hidden mt-4 p-4 rounded-lg text-xs font-mono leading-relaxed"></div>
+            </form>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <footer class="py-12 px-5 sm:px-8 border-t border-border bg-surface text-center">
+    <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div class="text-left">
+        <span class="font-bold text-headline tracking-tight block">Aaditya Kansakar</span>
+        <span class="text-xs text-zinc-400 font-mono">Web Developer • Creative Designer</span>
+      </div>
+      <div class="text-xs text-zinc-400 font-mono">
+        © 2026 Aaditya Kansakar. All rights reserved.
+      </div>
+    </div>
+  </footer>
+
+  <!-- Centered Modal System -->
+  <div id="modal-backdrop" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md hidden flex items-center justify-center p-4 sm:p-6" onclick="closeModalOnBackdrop(event)">
+    <div id="modal-container" class="relative w-full max-w-2xl bg-surface border border-border rounded-2xl shadow-2xl p-6 sm:p-8 max-h-[88vh] overflow-y-auto modal-enter" onclick="event.stopPropagation()">
+      <div class="flex items-center justify-between pb-4 mb-5 border-b border-border/70">
+        <div class="flex items-center gap-2">
+          <span class="w-2.5 h-2.5 rounded-full bg-accent inline-block"></span>
+          <span id="modal-category" class="text-xs font-mono uppercase tracking-wider text-accent font-medium">Information</span>
+        </div>
+        <button onclick="closeModal()" class="btn-magnetic p-2 rounded-lg bg-surface-elevated border border-border hover:border-accent text-zinc-400 hover:text-headline transition-colors" aria-label="Close dialog">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+          </svg>
+        </button>
+      </div>
+
+      <div id="modal-content-body" class="space-y-6"></div>
+
+      <div class="mt-8 pt-5 border-t border-border/70 flex items-center justify-between">
+        <span class="text-xs font-mono text-zinc-400">Aaditya Kansakar Portfolio</span>
+        <button onclick="closeModal()" class="btn-magnetic px-4 py-2 text-xs font-mono uppercase tracking-wider bg-surface-elevated text-headline border border-border hover:border-accent rounded-lg">
+          Close [Esc]
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    /* ----------------------------------------------------
+       1. Centered Modal System
+       ---------------------------------------------------- */
+    const modalBackdrop = document.getElementById('modal-backdrop');
+    const modalCategory = document.getElementById('modal-category');
+    const modalBody = document.getElementById('modal-content-body');
+
+    function openModal(category, contentHtml) {
+      modalCategory.innerText = category;
+      modalBody.innerHTML = contentHtml;
+      modalBackdrop.classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+      modalBackdrop.classList.add('hidden');
+      document.body.style.overflow = 'auto';
+    }
+
+    function closeModalOnBackdrop(e) {
+      if (e.target === modalBackdrop) closeModal();
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && !modalBackdrop.classList.contains('hidden')) {
+        closeModal();
+      }
+    });
+
+    /* ----------------------------------------------------
+       2. Case Studies & Information Databases
+       ---------------------------------------------------- */
+    const caseStudies = {
+      purnima: {
+        title: "Purnima Suppliers",
+        subtitle: "Wholesale Supplier Web Application Concept",
+        overview: "A specialized ecommerce-style web portal designed for wholesale inventory browsing, enabling regional suppliers to showcase bulk items with organized categorization.",
+        problem: "Traditional wholesale catalog systems are often clunky PDF files or heavy legacy portals that fail to adapt gracefully on modern mobile screens.",
+        approach: "Built a lightweight, client-side prototype focusing purely on intuitive browsing, zero page bloat, and instantaneous UI response times.",
+        design: "Developed clean card architectures with high contrast badges, clear wholesale pricing markers, and streamlined categorization in Figma before writing code.",
+        development: "Constructed with semantic HTML5, CSS Flexbox/Grid for responsive multi-column layouts, and modular vanilla JavaScript to manage search inputs and category filters.",
+        challenges: "Managing dynamic category filtering without third-party frameworks while keeping the DOM responsive and avoiding reflow stutter.",
+        result: "A clean, functional prototype demonstrating how wholesale product management can be fast, responsive, and visually appealing.",
+        learned: "Deepened practical mastery over JavaScript DOM manipulation, array filtering algorithms, and CSS responsive units."
+      },
+      portfolio: {
+        title: "Interactive Portfolio",
+        subtitle: "Personal Brand & Creative Engineering Showcase",
+        overview: "A custom personal portfolio built to introduce Aaditya Kansakar to employers, internship coordinators, and collaborators with genuine clarity.",
+        problem: "Most developer portfolios rely on cookie-cutter templates with fake statistics and bloated visual gimmicks that obscure real capabilities.",
+        approach: "Prioritized typography hierarchy, honest self-presentation, and purposeful micro-interactions over unnecessary dependencies.",
+        design: "Established a dark neutral theme (#090a0c) paired with an acid lime accent (#d2e823) and high-legibility sans typography.",
+        development: "Engineered in single-file format with lightweight vanilla JavaScript event listeners, custom cursor physics, and centered modal dialogues.",
+        challenges: "Ensuring smooth desktop mouse tracking while seamlessly defaulting back to natural touch interactions on mobile screens.",
+        result: "A fast-loading, credible, and aesthetically refined website that highlights authentic skills and ongoing growth.",
+        learned: "The balance between visual design restraint and expressive code—reinforcing that less is often much more."
+      },
+      creative: {
+        title: "Creative Interactive Web Experience",
+        subtitle: "Experimental Cinematic UI Concept",
+        overview: "A laboratory project exploring cinematic interface concepts, ambient visual indicators, and motion-driven navigation cues.",
+        problem: "Standard web layouts often follow identical grid structures, missing opportunities for atmospheric storytelling and visual immersion.",
+        approach: "Researched sci-fi heads-up displays (HUDs) and minimalist Japanese web interactions to design a dark, cinematic UI experiment.",
+        design: "Utilized subtle dashed borders, coordinate markers, and ambient micro-animations to convey a futuristic computing environment.",
+        development: "Implemented using CSS keyframe animations, mouse coordinate calculations, and Canvas visual experiments.",
+        challenges: "Achieving atmospheric visual depth without degrading battery life or dropping frame rates on lower-powered devices.",
+        result: "An engaging proof-of-concept that demonstrates creative versatility alongside standard layout development.",
+        learned: "Practical experience with requestAnimationFrame, CSS transform optimization, and hardware-accelerated rendering."
+      }
+    };
+
+    function openCaseStudy(key) {
+      const p = caseStudies[key];
+      if (!p) return;
+
+      const html = `
+        <div class="border-b border-border pb-4 stagger-1">
+          <span class="text-xs font-mono uppercase tracking-wider text-accent block mb-1">${p.subtitle}</span>
+          <h2 class="text-2xl sm:text-3xl font-bold text-headline tracking-tight">${p.title}</h2>
+        </div>
+
+        <div class="space-y-5 text-sm text-body leading-relaxed stagger-2">
+          <div>
+            <h4 class="text-xs font-mono uppercase tracking-wider text-headline mb-1 font-semibold">Overview</h4>
+            <p>${p.overview}</p>
+          </div>
+
+          <div class="space-y-4">
+            <div class="p-4 rounded-xl bg-surface-elevated border border-border">
+              <h4 class="text-xs font-mono uppercase tracking-wider text-accent mb-1 font-semibold">The Problem</h4>
+              <p class="text-xs sm:text-sm text-zinc-300">${p.problem}</p>
+            </div>
+            <div class="p-4 rounded-xl bg-surface-elevated border border-border">
+              <h4 class="text-xs font-mono uppercase tracking-wider text-accent mb-1 font-semibold">My Approach</h4>
+              <p class="text-xs sm:text-sm text-zinc-300">${p.approach}</p>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div class="p-4 rounded-xl bg-surface-elevated border border-border">
+              <h4 class="text-xs font-mono uppercase tracking-wider text-headline mb-1 font-semibold">Design Decisions</h4>
+              <p class="text-xs text-zinc-300">${p.design}</p>
+            </div>
+            <div class="p-4 rounded-xl bg-surface-elevated border border-border">
+              <h4 class="text-xs font-mono uppercase tracking-wider text-headline mb-1 font-semibold">Development</h4>
+              <p class="text-xs text-zinc-300">${p.development}</p>
+            </div>
+          </div>
+
+          <div class="p-4 rounded-xl bg-surface-elevated border border-border stagger-3">
+            <h4 class="text-xs font-mono uppercase tracking-wider text-headline mb-1 font-semibold">Challenges Overcome</h4>
+            <p class="text-xs sm:text-sm text-zinc-300">${p.challenges}</p>
+          </div>
+
+          <div class="p-4 rounded-xl bg-accent-muted border border-accent/20 stagger-3">
+            <h4 class="text-xs font-mono uppercase tracking-wider text-accent mb-1 font-semibold">What I Learned</h4>
+            <p class="text-xs sm:text-sm text-zinc-200">${p.learned}</p>
+          </div>
+        </div>
+
+        <div class="pt-2 flex items-center justify-between stagger-3">
+          <a href="#contact" onclick="closeModal()" class="text-xs font-mono text-accent hover:underline">
+            Discuss this project with Aaditya →
+          </a>
+        </div>
+      `;
+
+      openModal("Case Study", html);
+    }
+
+    const skillsData = {
+      html: {
+        title: "HTML5 Semantic Architecture",
+        badge: "Core Development",
+        description: "Semantic page structuring focused on modern SEO, clean DOM trees, and accessibility standards without unnecessary div wrapping.",
+        keyPoints: [
+          "Semantic tags (<main>, <article>, <header>, <nav>, <section>)",
+          "Accessible ARIA landmarks and micro-data attributes",
+          "Optimized media delivery, picture tags & lazy-loading"
+        ]
+      },
+      css: {
+        title: "CSS3 Layouts & Responsive Systems",
+        badge: "Styling & Motion",
+        description: "Modern CSS authoring using responsive Flexbox and Grid engines, CSS custom properties, and fluid typography units.",
+        keyPoints: [
+          "Modern Grid & Flexbox dimensional positioning",
+          "Custom properties (CSS Variables) for dynamic themes",
+          "Hardware-accelerated CSS keyframe transforms"
+        ]
+      },
+      javascript: {
+        title: "JavaScript (Modern ES6+)",
+        badge: "Scripting & Logic",
+        description: "Writing lightweight, performant client-side scripts for dynamic filtering, state handling, DOM manipulation, and asynchronous APIs.",
+        keyPoints: [
+          "Vanilla DOM querying & event delegation",
+          "Async/Await, Fetch API, and JSON processing",
+          "Custom cursor math and coordinate transformations"
+        ]
+      },
+      github: {
+        title: "Git & GitHub Version Control",
+        badge: "Collaboration & Safety",
+        description: "Version tracking, branch workflows, pull requests, and organized commit hygiene for clean codebases.",
+        keyPoints: [
+          "Conventional commits and semantic versioning",
+          "Branch isolation and merge conflict resolution",
+          "GitHub repositories & CI/CD deployment hooks"
+        ]
+      },
+      react: {
+        title: "React Fundamentals",
+        badge: "Component Systems",
+        description: "Component-based architecture, reactive state management using React hooks, and modular UI compositions.",
+        keyPoints: [
+          "Declarative JSX component rendering",
+          "useState, useEffect & custom lifecycle patterns",
+          "Prop drilling mitigation and modular component trees"
+        ]
+      },
+      responsive: {
+        title: "Responsive Web Engineering",
+        badge: "Device Adaptability",
+        description: "Designing websites with zero horizontal scroll, fluid percentages, touch-friendly tap targets, and adaptive navigation.",
+        keyPoints: [
+          "Fluid viewport width & clamped typography (clamp())",
+          "Touch event mitigation and responsive mobile menus",
+          "Cross-browser compatibility testing (WebKit, Blink, Gecko)"
+        ]
+      },
+      figma: {
+        title: "Figma UI/UX Prototyping",
+        badge: "Design Toolkit",
+        description: "End-to-end interface prototyping, AutoLayout systems, component variants, and precise design-to-code translation.",
+        keyPoints: [
+          "AutoLayout responsive frames & nested constraints",
+          "Atomic design component libraries & design tokens",
+          "Interactive clickable prototypes and user flow maps"
+        ]
+      },
+      uidesign: {
+        title: "User Interface Design",
+        badge: "Visual Craft",
+        description: "Focusing on visual hierarchy, balanced whitespace, restrained color palettes, and frictionless user journeys.",
+        keyPoints: [
+          "Typographic scale & contrast ratios (WCAG AAA)",
+          "Card surface depth and subtle elevation borders",
+          "Scannable content layouts and micro-interactions"
+        ]
+      },
+      graphicdesign: {
+        title: "Graphic Design & Digital Identity",
+        badge: "Visual Storytelling",
+        description: "Composing typography posters, banners, and digital graphics with bold contrast and deliberate spacing.",
+        keyPoints: [
+          "Editorial grid composition and balance",
+          "High-contrast color theory and neutral backgrounds",
+          "Vector artwork and SVG optimization"
+        ]
+      },
+      composition: {
+        title: "Visual Composition & Typography",
+        badge: "Aesthetic Balance",
+        description: "Establishing rhythm, font pairing, line lengths, and optical margins for peak legibility.",
+        keyPoints: [
+          "Vertical rhythm and baseline alignment",
+          "Negative space as a functional structural tool",
+          "Harmonious typographic pairings (Sans + Mono)"
+        ]
+      },
+      videoediting: {
+        title: "Video Editing & Short-Form Content",
+        badge: "Motion & Sound",
+        description: "Editing fast-paced reels, product teasers, and video presentations with tight beat-syncing and pacing.",
+        keyPoints: [
+          "Dynamic jump cuts and beat synchronization",
+          "Pacing control and visual retention techniques",
+          "Sound design layering and color correction"
+        ]
+      },
+      motionui: {
+        title: "Motion UI & Animation Concepts",
+        badge: "Micro-interactions",
+        description: "Crafting purposeful animations that provide instant visual confirmation without slowing down navigation.",
+        keyPoints: [
+          "Cubic-bezier timing curves (0.16, 1, 0.3, 1)",
+          "Hover spotlights and magnetic cursor followers",
+          "Spring-driven entrance transitions"
+        ]
+      },
+      interactiveweb: {
+        title: "Interactive Web Experiences",
+        badge: "Creative Engineering",
+        description: "Designing interactive portfolios, dark-mode labs, and cinematic UI experiments with high tactile feedback.",
+        keyPoints: [
+          "Canvas rendering and coordinate math",
+          "Real-time mouse feedback and modal dialogs",
+          "Story-driven web interfaces"
+        ]
+      }
+    };
+
+    function openSkillModal(key) {
+      const s = skillsData[key];
+      if (!s) return;
+
+      const html = `
+        <div class="border-b border-border pb-4 stagger-1">
+          <span class="text-xs font-mono uppercase tracking-wider text-accent block mb-1">${s.badge}</span>
+          <h2 class="text-2xl sm:text-3xl font-bold text-headline tracking-tight">${s.title}</h2>
+        </div>
+
+        <div class="space-y-5 text-sm text-body leading-relaxed stagger-2">
+          <div>
+            <h4 class="text-xs font-mono uppercase tracking-wider text-headline mb-1 font-semibold">Overview</h4>
+            <p>${s.description}</p>
+          </div>
+
+          <div class="p-4 rounded-xl bg-surface-elevated border border-border">
+            <h4 class="text-xs font-mono uppercase tracking-wider text-accent mb-3 font-semibold">Core Capabilities</h4>
+            <ul class="space-y-2 text-xs sm:text-sm text-zinc-300">
+              ${s.keyPoints.map(point => `
+                <li class="flex items-start gap-2">
+                  <span class="text-accent font-bold">✓</span>
+                  <span>${point}</span>
+                </li>
+              `).join('')}
+            </ul>
+          </div>
+        </div>
+
+        <div class="pt-2 flex items-center justify-between stagger-3">
+          <a href="#contact" onclick="closeModal()" class="text-xs font-mono text-accent hover:underline">
+            Discuss a project using ${s.title} →
+          </a>
+        </div>
+      `;
+
+      openModal("Skill Spec", html);
+    }
+
+    const servicesData = {
+      websites: {
+        title: "Full Website Development",
+        tag: "Service 01",
+        description: "Turnkey responsive websites built from scratch using clean, modern code. Designed to load fast, rank effectively on search engines, and represent your brand with genuine craftsmanship.",
+        deliverables: [
+          "Fully responsive layouts across mobile, tablet, and desktop",
+          "Clean, well-documented HTML5, CSS3, and JavaScript",
+          "Working contact forms and one-tap communication integrations",
+          "Performance optimization (90+ Google PageSpeed score target)"
+        ],
+        timeline: "Typically 1 to 2 weeks"
+      },
+      uidesign: {
+        title: "UI Design & Figma Prototypes",
+        tag: "Service 02",
+        description: "Structured design mockups crafted in Figma with clear component systems, responsive auto-layouts, and clickable interaction flows ready for developer handover.",
+        deliverables: [
+          "Comprehensive Figma source file with organized frames",
+          "Interactive clickable prototype for testing and review",
+          "Exportable SVG assets, icons, and color typography tokens",
+          "Mobile and desktop responsive variants"
+        ],
+        timeline: "Typically 3 to 7 business days"
+      },
+      creativeweb: {
+        title: "Creative Web Experiences",
+        tag: "Service 03",
+        description: "For brands and creators seeking more than a standard template: interactive portfolios, product landing pages with custom cursor feedback, and narrative-driven motion.",
+        deliverables: [
+          "Custom mouse micro-interactions & magnetic buttons",
+          "Atmospheric dark-mode styling and bespoke visual layout",
+          "Hardware-accelerated CSS and Canvas animations",
+          "Single-file or modular frontend deployment"
+        ],
+        timeline: "Typically 1 to 2 weeks"
+      },
+      graphicdesign: {
+        title: "Graphic Design & Digital Assets",
+        tag: "Service 04",
+        description: "High-impact visual graphics designed to strengthen your digital presence—from social banners and posters to web promotional banners.",
+        deliverables: [
+          "High-resolution vector assets (SVG, PNG, WebP)",
+          "Social media promotional graphics and cover banners",
+          "Typography-driven editorial layouts",
+          "Clean branding guidelines"
+        ],
+        timeline: "Typically 2 to 5 business days"
+      },
+      videoediting: {
+        title: "Video Editing & Content Creation",
+        tag: "Service 05",
+        description: "Engaging short-form video content tailored for social platforms, product demos, and creative showcases with precise beat-syncing.",
+        deliverables: [
+          "Short-form 9:16 vertical reels & 16:9 widescreen formats",
+          "Audio synchronization, beat cuts, and sound effect layering",
+          "Clean typography overlays and motion callouts",
+          "High-bitrate exports ready for publishing"
+        ],
+        timeline: "Typically 2 to 4 business days"
+      }
+    };
+
+    function openServiceModal(key) {
+      const s = servicesData[key];
+      if (!s) return;
+
+      const html = `
+        <div class="border-b border-border pb-4 stagger-1">
+          <span class="text-xs font-mono uppercase tracking-wider text-accent block mb-1">${s.tag}</span>
+          <h2 class="text-2xl sm:text-3xl font-bold text-headline tracking-tight">${s.title}</h2>
+        </div>
+
+        <div class="space-y-5 text-sm text-body leading-relaxed stagger-2">
+          <div>
+            <h4 class="text-xs font-mono uppercase tracking-wider text-headline mb-1 font-semibold">Scope &amp; Purpose</h4>
+            <p>${s.description}</p>
+          </div>
+
+          <div class="p-4 rounded-xl bg-surface-elevated border border-border">
+            <h4 class="text-xs font-mono uppercase tracking-wider text-accent mb-3 font-semibold">What You Receive</h4>
+            <ul class="space-y-2 text-xs sm:text-sm text-zinc-300">
+              ${s.deliverables.map(item => `
+                <li class="flex items-start gap-2">
+                  <span class="text-accent font-bold">✓</span>
+                  <span>${item}</span>
+                </li>
+              `).join('')}
+            </ul>
+          </div>
+
+          <div class="p-3.5 rounded-lg bg-accent-muted border border-accent/20 text-xs font-mono text-zinc-200 flex items-center justify-between">
+            <span>Estimated Turnaround:</span>
+            <span class="text-accent font-semibold">${s.timeline}</span>
+          </div>
+        </div>
+
+        <div class="pt-2 flex items-center justify-between stagger-3">
+          <a href="#contact" onclick="closeModal()" class="btn-magnetic inline-flex items-center justify-center px-4 py-2 text-xs font-semibold uppercase tracking-wider text-black bg-headline hover:bg-accent rounded-md">
+            Request This Service
+          </a>
+        </div>
+      `;
+
+      openModal("Service Offering", html);
+    }
+
+    const showcaseData = {
+      figmaFrame: {
+        title: "Minimal Dashboard Frame Breakdown",
+        type: "Figma UI Prototype",
+        details: "Built using strict 8px spacing grids, nested AutoLayout containers, and variable components. Designed to demonstrate how a complex SaaS data screen can maintain serene visual hierarchy through restrained typography and subtle card borders.",
+        tools: "Figma • AutoLayout 5.0 • Inter & JetBrains Mono",
+        highlight: "100% modular component tokens that effortlessly translate into CSS Flexbox/Grid."
+      },
+      editorialPoster: {
+        title: "Editorial Typography Poster Breakdown",
+        type: "Graphic Design Study",
+        details: "An exercise in extreme contrast and negative space. Explores how bold sans-serif headlines interact with delicate monospaced subtext to create visual tension and aesthetic intrigue without photographic clutter.",
+        tools: "Adobe Photoshop • Illustrator • Figma",
+        highlight: "Exemplifies how negative space acts as a functional design anchor."
+      },
+      videoMotion: {
+        title: "Short-Form Motion Cut Breakdown",
+        type: "Video & Motion Edit",
+        details: "A 24fps motion study featuring fast jump-cuts, audio-reactive transitions, and sound design accentuation. Created to test how visual momentum keeps audience engagement high throughout quick 15-30 second reels.",
+        tools: "Premiere Pro • After Effects • Audition",
+        highlight: "Precision cuts locked tightly to percussion transients."
+      }
+    };
+
+    function openShowcaseModal(key) {
+      const item = showcaseData[key];
+      if (!item) return;
+
+      const html = `
+        <div class="border-b border-border pb-4 stagger-1">
+          <span class="text-xs font-mono uppercase tracking-wider text-accent block mb-1">${item.type}</span>
+          <h2 class="text-2xl sm:text-3xl font-bold text-headline tracking-tight">${item.title}</h2>
+        </div>
+
+        <div class="space-y-5 text-sm text-body leading-relaxed stagger-2">
+          <div>
+            <h4 class="text-xs font-mono uppercase tracking-wider text-headline mb-1 font-semibold">Concept &amp; Execution</h4>
+            <p>${item.details}</p>
+          </div>
+
+          <div class="p-4 rounded-xl bg-surface-elevated border border-border">
+            <h4 class="text-xs font-mono uppercase tracking-wider text-headline mb-1 font-semibold">Tools &amp; Pipeline</h4>
+            <p class="text-xs sm:text-sm font-mono text-accent">${item.tools}</p>
+          </div>
+
+          <div class="p-4 rounded-xl bg-accent-muted border border-accent/20">
+            <h4 class="text-xs font-mono uppercase tracking-wider text-accent mb-1 font-semibold">Key Takeaway</h4>
+            <p class="text-xs sm:text-sm text-zinc-200">${item.highlight}</p>
+          </div>
+        </div>
+      `;
+
+      openModal("Showcase Breakdown", html);
+    }
+
+    function openModalInfo(type) {
+      if (type === 'developerConfig') {
+        const html = `
+          <div class="border-b border-border pb-4 stagger-1">
+            <span class="text-xs font-mono uppercase tracking-wider text-accent block mb-1">System Config Inspector</span>
+            <h2 class="text-2xl sm:text-3xl font-bold text-headline tracking-tight">aaditya.config.js Runtime</h2>
+          </div>
+          <div class="space-y-4 text-sm font-mono text-zinc-300 stagger-2">
+            <div class="p-4 rounded-xl bg-surface-elevated border border-border space-y-2">
+              <div class="text-accent font-semibold">// Developer Status</div>
+              <div>Availability: <span class="text-emerald-400">Open for internships, freelance &amp; junior roles</span></div>
+              <div>Location: <span class="text-zinc-200">Nepal (UTC+5:45)</span></div>
+              <div>Direct Phone: <a href="tel:+9779845167499" class="text-accent hover:underline">+977 9845167499</a></div>
+              <div>Primary Email: <a href="mailto:aadityakansakar@gmail.com" class="text-accent hover:underline">aadityakansakar@gmail.com</a></div>
+            </div>
+            <p class="text-xs text-body leading-relaxed">
+              This portfolio is hand-coded without heavyweight template frameworks to preserve instantaneous page loading, tactile button responsiveness, and clean semantic architecture.
+            </p>
+          </div>
+        `;
+        openModal("Config Specs", html);
+      } else {
+        const html = `
+          <div class="border-b border-border pb-4 stagger-1">
+            <span class="text-xs font-mono uppercase tracking-wider text-accent block mb-1">Live UI Inspector</span>
+            <h2 class="text-2xl sm:text-3xl font-bold text-headline tracking-tight">Interactive UI Node Tree</h2>
+          </div>
+          <div class="space-y-4 text-sm text-body leading-relaxed stagger-2">
+            <p>
+              The hero canvas visual demonstrates continuous DOM telemetry, responsive CSS grid reflows, and hardware-accelerated animations running at a consistent 60 frames per second.
+            </p>
+            <div class="p-4 rounded-xl bg-surface-elevated border border-border font-mono text-xs text-zinc-300 space-y-1">
+              <div>• Pointer Tracking: Active (Fine Mouse &amp; Touch Gesture)</div>
+              <div>• Animation Engine: CSS Transform Matrix3D + requestAnimationFrame</div>
+              <div>• Dialog System: Centered spring modal with scale &amp; fade entrance</div>
+            </div>
+          </div>
+        `;
+        openModal("UI Node Specs", html);
+      }
+    }
+
+    /* ----------------------------------------------------
+       3. Tactile Ripple Waves on Click
+       ---------------------------------------------------- */
+    document.addEventListener('click', function(e) {
+      const target = e.target.closest('.btn-magnetic, .hover-lift, .spotlight-card');
+      if (target) {
+        const rect = target.getBoundingClientRect();
+        const wave = document.createElement('span');
+        wave.className = 'ripple-wave';
+        wave.style.left = `${e.clientX - rect.left}px`;
+        wave.style.top = `${e.clientY - rect.top}px`;
+        
+        const pos = window.getComputedStyle(target).position;
+        if (pos === 'static') target.style.position = 'relative';
+        
+        target.appendChild(wave);
+        setTimeout(() => wave.remove(), 600);
+      }
+    });
+
+    /* ----------------------------------------------------
+       4. Custom Cursor & Spotlight Tracking
+       ---------------------------------------------------- */
+    const cursorFollower = document.getElementById('cursor-follower');
+    const cursorDot = document.getElementById('cursor-dot');
+
+    if (cursorFollower && cursorDot && window.matchMedia('(pointer: fine)').matches) {
+      window.addEventListener('mousemove', (e) => {
+        cursorDot.style.left = `${e.clientX}px`;
+        cursorDot.style.top = `${e.clientY}px`;
+        
+        cursorFollower.animate({
+          left: `${e.clientX}px`,
+          top: `${e.clientY}px`
+        }, { duration: 250, fill: "forwards" });
+      });
+
+      document.querySelectorAll('a, button, input, textarea, .spotlight-card, .hover-lift').forEach(el => {
+        el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
+        el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
+      });
+    }
+
+    document.querySelectorAll('.spotlight-card').forEach(card => {
+      card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        card.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`);
+        card.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`);
+      });
+    });
+
+    /* 3D Tilt on Hero card */
+    const heroCard = document.getElementById('hero-interactive-card');
+    const heroContainer = document.getElementById('hero-card-container');
+    if (heroContainer && heroCard) {
+      heroContainer.addEventListener('mousemove', (e) => {
+        const rect = heroContainer.getBoundingClientRect();
+        const x = (e.clientX - rect.left) / rect.width - 0.5;
+        const y = (e.clientY - rect.top) / rect.height - 0.5;
+        heroCard.style.transform = `perspective(1000px) rotateY(${x * 8}deg) rotateX(${-y * 8}deg) translateZ(10px)`;
+      });
+      heroContainer.addEventListener('mouseleave', () => {
+        heroCard.style.transform = 'perspective(1000px) rotateY(0deg) rotateX(0deg) translateZ(0)';
+      });
+    }
+
+    /* ----------------------------------------------------
+       5. Mobile Navigation
+       ---------------------------------------------------- */
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const menuIcon = document.getElementById('menu-icon');
+    const closeIcon = document.getElementById('close-icon');
+
+    if (mobileMenuBtn && mobileMenu) {
+      mobileMenuBtn.addEventListener('click', () => {
+        const isClosed = mobileMenu.classList.contains('hidden');
+        if (isClosed) {
+          mobileMenu.classList.remove('hidden');
+          menuIcon.classList.add('hidden');
+          closeIcon.classList.remove('hidden');
+        } else {
+          mobileMenu.classList.add('hidden');
+          menuIcon.classList.remove('hidden');
+          closeIcon.classList.add('hidden');
+        }
+      });
+
+      document.querySelectorAll('.mobile-nav-link').forEach(link => {
+        link.addEventListener('click', () => {
+          mobileMenu.classList.add('hidden');
+          menuIcon.classList.remove('hidden');
+          closeIcon.classList.add('hidden');
+        });
+      });
+    }
+
+    /* ----------------------------------------------------
+       6. Clipboard Copy
+       ---------------------------------------------------- */
+    function copyEmailToClipboard() {
+      const email = "aadityakansakar@gmail.com";
+      const tempInput = document.createElement("input");
+      tempInput.value = email;
+      document.body.appendChild(tempInput);
+      tempInput.select();
+      
+      try {
+        document.execCommand('copy');
+        const feedback = document.getElementById('copy-feedback');
+        const btnText = document.getElementById('copy-btn-text');
+        
+        if (feedback && btnText) {
+          feedback.classList.remove('hidden');
+          btnText.innerText = "Copied!";
+          setTimeout(() => {
+            feedback.classList.add('hidden');
+            btnText.innerText = "Copy";
+          }, 3000);
+        }
+      } catch (err) {
+        console.error("Copy action failed: ", err);
+      } finally {
+        document.body.removeChild(tempInput);
+      }
+    }
+
+    /* ----------------------------------------------------
+       7. Contact Form with Endpoint & Mailto Fallback
+       ---------------------------------------------------- */
+    const contactForm = document.getElementById('portfolio-contact-form');
+    if (contactForm) {
+      contactForm.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        
+        const submitBtn = document.getElementById('form-submit-btn');
+        const submitText = document.getElementById('submit-btn-text');
+        const statusBox = document.getElementById('form-status');
+        
+        const name = document.getElementById('contact-name').value.trim();
+        const email = document.getElementById('contact-email').value.trim();
+        const subject = document.getElementById('contact-subject').value.trim() || 'New Portfolio Project Inquiry';
+        const message = document.getElementById('contact-message').value.trim();
+
+        submitBtn.disabled = true;
+        submitText.innerText = "Sending Message...";
+        statusBox.classList.add('hidden');
+
+        try {
+          const response = await fetch(contactForm.action, {
+            method: 'POST',
+            body: new FormData(contactForm),
+            headers: {
+              'Accept': 'application/json'
+            }
+          });
+
+          if (response.ok) {
+            statusBox.className = "mt-4 p-4 rounded-lg text-xs font-mono leading-relaxed bg-emerald-950/60 border border-emerald-600/50 text-emerald-300 relative z-10";
+            statusBox.innerHTML = `✓ Thank you, ${name}! Your message has been sent successfully to aadityakansakar@gmail.com. I'll get back to you shortly.`;
+            statusBox.classList.remove('hidden');
+            contactForm.reset();
+          } else {
+            throw new Error("Endpoint rejected submission");
+          }
+        } catch (error) {
+          const mailtoUrl = `mailto:aadityakansakar@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent("Sender Name: " + name + "\nSender Email: " + email + "\n\nMessage:\n" + message)}`;
+          window.location.href = mailtoUrl;
+
+          statusBox.className = "mt-4 p-4 rounded-lg text-xs font-mono leading-relaxed bg-surface-elevated border border-accent/40 text-headline relative z-10";
+          statusBox.innerHTML = `✓ Opening your email client to send message to <strong class="text-accent">aadityakansakar@gmail.com</strong>. You can also contact directly at <a href="tel:+9779845167499" class="underline text-accent">+977 9845167499</a>.`;
+          statusBox.classList.remove('hidden');
+        } finally {
+          submitBtn.disabled = false;
+          submitText.innerText = "Send Message";
+        }
+      });
+    }
+  </script>
+</body>
+</html>
